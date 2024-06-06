@@ -53,16 +53,28 @@ Utilizado <strong>Metodologia Scrum</strong> para realização do projeto.
 <hr>
 <h3>Integrantes</h3>
 <p><strong>Scrum Master:</strong> Alanis Rodovalho Ferreira<br />
+    
 <strong>Product Owner:</strong> Gustavo Magosso Gomes<br />
-<strong>Equipe de Desenvolvimento:</strong>
-</p>
-<ul>
-<li>Ana Luiza Gomes Nunes</li>
-<li>Julio Cesar Ferreira Silva</li>
-<li>Ryan Roberto Marques da Silva</li>
-</ul>
 
-<h7>Grupo Ânima - UNA Uberlândia</h7>
+<strong>Equipe de Desenvolvimento:</strong><br />
+• Ana Luiza Gomes Nunes<br />
+• Julio Cesar Ferreira Silva<br />
+• Ryan Roberto Marques da Silva
+
+<sub>UNA Uberlândia</sub>
+<table>
+<tbody>
+<tr>
+<td><img src="https://repositorio-api.animaeducacao.com.br/server/api/core/bitstreams/24b5cd92-02ac-4aab-90d1-40515d6135da/content" style="height: 22px; width:77px;"/></td>
+<td><img src="https://anima.uliving.com.br/wp-content/uploads/2021/09/logoAnima.png" style="height: 50px; width:66px;"/></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
 
 
 
