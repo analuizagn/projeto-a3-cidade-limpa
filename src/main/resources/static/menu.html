@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cidade Limpa</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+          integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            font-weight: bold;
+            color: greenyellow;
+        }
+
+        .logo {
+            font-size: 40px;
+            font-family: "Dancing Script", cursive;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: #2f8408;
+            height: 13vh;
+        }
+
+        main {
+            background: url("pexels-felixmittermeier-957024.jpg") no-repeat center center;
+            background-size: cover;
+            height: 92vh;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-list li {
+            margin-left: 50px;
+        }
+
+        .mobile-menu {
+            display: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu div {
+            width: 32px;
+            height: 2px;
+            background: #fff;
+            margin: 8px;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 999px) {
+            body {
+                overflow-x: hidden;
+            }
+
+            .nav-list {
+                position: absolute;
+                top: 13vh;
+                right: 0;
+                width: 45vw;
+                height: 70%;
+                background: #1f5606;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: first baseline;
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in;
+            }
+
+            .nav-list li {
+                opacity: 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+        }
+
+        .nav-list.active {
+            transform: translateX(0);
+        }
+
+        @keyframes navLinkFade {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .mobile-menu.active .line1 {
+            transform: rotate(-45deg) translate(-8px, 8px);
+        }
+
+        .mobile-menu.active .line2 {
+            opacity: 0;
+        }
+
+        .mobile-menu.active .line3 {
+            transform: rotate(45deg) translate(-5px, -7px);
+        }
+    </style>
+
+</head>
+
+<body>
+<header>
+    <nav>
+        <a class="logo" href="menu.html">Cidade Limpa</a>
+        <div class="mobile-menu">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+        <ul class="nav-list">
+            <li><a href="menu.html">Início</a></li>
+            <li><a href="register.html">Criar nova conta</a></li>
+            <li><a href="search.html">Buscar usuário</a></li>
+            <li><a href="update.html">Alterar dados da conta</a></li>
+            <li><a href="delete.html">Deletar conta</a></li>
+        </ul>
+    </nav>
+</header>
+<main></main>
+
+<script>
+    class Script {
+        constructor(mobileMenu, navList, navLinks) {
+            this.mobileMenu = document.querySelector(mobileMenu);
+            this.navList = document.querySelector(navList);
+            this.navLinks = document.querySelectorAll(navLinks);
+            this.activeClass = "active";
+
+            this.handleClick = this.handleClick.bind(this);
+        }
+
+        animateLinks() {
+            this.navLinks.forEach((link, index) => {
+                link.style.animation
+                    ? (link.style.animation = "")
+                    : (link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3
+                        }s`);
+            });
+        }
+
+        handleClick() {
+            this.navList.classList.toggle(this.activeClass);
+            this.mobileMenu.classList.toggle(this.activeClass);
+            this.animateLinks();
+        }
+
+        addClickEvent() {
+            this.mobileMenu.addEventListener("click", this.handleClick);
+        }
+
+        init() {
+            if (this.mobileMenu) {
+                this.addClickEvent();
+            }
+            return this;
+        }
+    }
+
+    const script = new Script(
+        ".mobile-menu",
+        ".nav-list",
+        ".nav-list li",
+    );
+    script.init();
+</script>
+
+</body>
+
+</html>

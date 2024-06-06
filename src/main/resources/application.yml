@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:cadastro_projeto_a3_db
+    username: una
+    password:
+  jpa:
+    show-sql: true
+    hibernate:
+      properties:
+        hibernate.format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      setting:
+        trace: false
+        web-allow-others: false

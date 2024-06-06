@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar usuário</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+          integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+          padding: 0;
+          margin: 0;
+          box-sizing: border-box;
+          font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0 20px;
+          background: #c4ecae;
+        }
+
+        body::before {
+          content: '';
+          background: url("pexels-felixmittermeier-957024.jpg");
+          background-size: cover;
+          position: absolute;
+          width: 100%;
+          height: 168%;
+          opacity: 25%;
+        }
+
+        .container {
+          position: relative;
+          max-width: 700px;
+          width: 100%;
+          border-radius: 8px;
+          margin: 14px;
+          box-sizing: 0 3px 5px rgba(0, 0, 0, 0.5);
+          background-color: #fafafa;
+          overflow: hidden;
+        }
+
+        .header {
+          background: #2f8408;
+          padding: 30px;
+          text-align: center;
+          color: #FFF;
+        }
+
+        .container .form {
+          padding: 18px;
+        }
+
+        .form .input-box {
+          width: 100%;
+          margin-top: 20px;
+        }
+
+        .input-box label {
+          color: #333;
+
+        }
+
+        .form .input-box input {
+          position: relative;
+          height: 50px;
+          width: 100%;
+          outline: none;
+          font-size: 14px;
+          color: #707070;
+          margin-top: 8px;
+          border: 1px solid #ddd;
+          border-radius: 6px;
+          padding: 0 15px;
+        }
+
+        .input-box a {
+          font-size: 12px;
+          visibility: hidden;
+        }
+
+        .form .column {
+          display: flex;
+          column-gap: 15px;
+        }
+
+        .form button {
+          background-color: #2f8408;
+          color: #FFF;
+          width: 100%;
+          font-size: 1rem;
+          border: none;
+          padding: 10px;
+          margin-top: 30px;
+          cursor: pointer;
+          border-bottom: 6px;
+          border-radius: 8px;
+          font-weight: 400;
+          transition: all 0.2s ease;
+        }
+
+        .form button:hover {
+          background-color: #44b112;
+        }
+
+        .form .back-button {
+          background-color: #c20e0e;
+          color: #FFF;
+          width: 100%;
+          font-size: 1rem;
+          border: none;
+          padding: 10px;
+          margin-top: 30px;
+          cursor: pointer;
+          border-bottom: 6px;
+          border-radius: 8px;
+          font-weight: 400;
+          transition: all 0.2s ease;
+        }
+
+        .form .back-button:hover {
+          background-color: #d13838;
+        }
+
+        .input-box.error input {
+          border-color: #ff3b25;
+        }
+
+        .input-box.error a {
+          color: #ff3b25;
+          visibility: visible;
+        }
+
+
+        /* Responsive */
+        @media screen and (max-width: 500px) {
+          .form .column {
+            flex-wrap: wrap;
+          }
+        }
+    </style>
+</head>
+
+<body>
+
+<section class="container">
+    <section class="header">
+        <h2>Criar nova conta</h2>
+    </section>
+
+    <form action="api/usuarios" method="POST" id="form" class="form">
+        <div class="input-box">
+            <label>Nome Completo</label>
+            <input name="nome" type="text" id="nome" placeholder="Digite o nome completo..." required>
+            <a>Aqui vai a mensagem de erro....</a>
+        </div>
+
+        <div class="column">
+            <div class="input-box">
+                <label>CPF ou CNPJ</label>
+                <input name="cpf_cnpj" type="text" id="cpf_cnpj" placeholder="Digite o CPF ou CNPJ..." required>
+                <a>Aqui vai a mensagem de erro....</a>
+            </div>
+
+            <div class="input-box">
+                <label>Telefone</label>
+                <input name="telefone" type="text" id="telefone" placeholder="(xx) xxxx-xxxx" required>
+                <a>Aqui vai a mensagem de erro....</a>
+            </div>
+        </div>
+
+        <div class="input-box">
+            <label>Endereço</label>
+            <input name="cep" type="text" id="cep" placeholder="Digite o CEP..." required>
+            <a>Aqui vai a mensagem de erro....</a>
+            <input name="rua" type="text" id="rua" placeholder="Digite a rua com número..." required>
+            <a>A rua é obrigatória!</a>
+            <input name="bairro" type="text" id="bairro" placeholder="Digite o bairro..." required>
+            <a>O bairro é obrigatório!</a>
+            <input name="cidade" type="text" id="cidade" placeholder="Digite o cidade..." required>
+            <a>A cidade é obrigatória!</a>
+            <input name="estado" type="text" id="estado" placeholder="Digite o UF do estado..." required>
+            <a>O estado é obrigatório!</a>
+        </div>
+
+
+        <div class="input-box">
+            <label>E-mail</label>
+            <input name="email" type="email" id="email" placeholder="Digite o endereço de e-mail..." required>
+            <a>Aqui vai a mensagem de erro....</a>
+        </div>
+
+        <div class="input-box">
+            <label>Senha</label>
+            <input name="senha" type="password" id="senha" placeholder="Digite a senha..." required>
+            <a>Aqui vai a mensagem de erro....</a>
+        </div>
+
+        <button type="submit" name="submit" id="submit">Enviar</button>
+        <button class="back-button" id="back-button">Cancelar</button>
+
+    </form>
+</section>
+
+<script>
+    const backButton = document.getElementById('back-button');
+    backButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      window.location.href = 'menu.html';
+    });
+
+    const form = document.getElementById('form');
+    const nome = document.getElementById('nome');
+    const cpf_cnpj = document.getElementById('cpf_cnpj');
+    const telefone = document.getElementById('telefone');
+    const cep = document.getElementById('cep');
+    const rua = document.getElementById('rua');
+    const bairro = document.getElementById('bairro');
+    const cidade = document.getElementById('cidade');
+    const estado = document.getElementById('estado');
+    const email = document.getElementById('email');
+    const senha = document.getElementById('senha');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      checkForm();
+    })
+
+    nome.addEventListener("blur", () => {
+      checkInputNome();
+    })
+
+    cpf_cnpj.addEventListener("blur", () => {
+      checkInputCpfCnpj();
+    })
+
+    telefone.addEventListener("blur", () => {
+      checkInputTelefone();
+    })
+
+    cep.addEventListener("blur", () => {
+      checkInputCep();
+    })
+
+    rua.addEventListener("blur", () => {
+      checkInputRua();
+    })
+
+    bairro.addEventListener("blur", () => {
+      checkInputBairro();
+    })
+
+    cidade.addEventListener("blur", () => {
+      checkInputCidade();
+    })
+
+    estado.addEventListener("blur", () => {
+      checkInputEstado();
+    })
+
+    email.addEventListener("blur", () => {
+      checkInputEmail();
+    })
+
+    senha.addEventListener("blur", () => {
+      checkInputSenha();
+    })
+
+    function checkInputNome() {
+      const nomeValue = nome.value;
+
+      if (nomeValue === "") {
+        errorInput(nome, "O nome é obrigatório!")
+      } else {
+        const formItem = nome.parentElement;
+        formItem.className = "input-box"
+      }
+
+    }
+
+    function checkInputCpfCnpj() {
+      const cpf_cnpjValue = cpf_cnpj.value;
+
+      if (cpf_cnpjValue === "") {
+        errorInput(cpf_cnpj, "O CPF ou CNPJ são obrigatórios!")
+      } else {
+        const formItem = cpf_cnpj.parentElement;
+        formItem.className = "input-box"
+      }
+
+    }
+
+    function checkInputTelefone() {
+      const telefoneValue = telefone.value;
+
+      if (telefoneValue === "") {
+        errorInput(telefone, "O telefone é obrigatório!")
+      } else {
+        const formItem = telefone.parentElement;
+        formItem.className = "input-box"
+      }
+
+    }
+
+    function checkInputCep() {
+      const cepValue = cep.value;
+
+      if (cepValue === "") {
+        errorInput(cep, "O CEP é obrigatório!")
+      } else {
+        const formItem = cep.parentElement;
+        formItem.className = "input-box"
+      }
+
+    }
+
+    function checkInputRua() {
+      const ruaValue = rua.value;
+
+      if (ruaValue === "") {
+        errorInput(rua, "A rua é obrigatória!")
+      } else {
+        const formItem = rua.parentElement;
+        formItem.className = "input-box"
+      }
+
+    }
+
+    function checkInputBairro() {
+      const bairroValue = bairro.value;
+
+      if (bairroValue === "") {
+        errorInput(bairro, "O bairro é obrigatório!")
+      } else {
+        const formItem = bairro.parentElement;
+        formItem.className = "input-box"
+      }
+
+    }
+
+    function checkInputCidade() {
+      const cidadeValue = cidade.value;
+
+      if (cidadeValue === "") {
+        errorInput(cidade, "A cidade é obrigatória!")
+      } else {
+        const formItem = cidade.parentElement;
+        formItem.className = "input-box"
+      }
+
+    }
+
+    function checkInputEstado() {
+      const estadoValue = estado.value;
+
+      if (estadoValue === "") {
+        errorInput(estado, "O estado é obrigatório!")
+      } else {
+        const formItem = estado.parentElement;
+        formItem.className = "input-box"
+      }
+
+    }
+
+    function checkInputEmail() {
+      const emailValue = email.value;
+
+      if (emailValue === "") {
+        errorInput(email, "O email é obrigatório!")
+      } else {
+        const formItem = email.parentElement;
+        formItem.className = "input-box"
+      }
+
+
+    }
+
+    function checkInputSenha() {
+      const senhaValue = senha.value;
+
+      if (senhaValue === "") {
+        errorInput(senha, "A senha é obrigatória.")
+      } else if (senhaValue.length < 8) {
+        errorInput(senha, "A senha precisa ter no mínimo 8 caracteres.")
+      } else {
+        const formItem = senha.parentElement;
+        formItem.className = "input-box"
+      }
+
+
+    }
+
+    function handleError(error) {
+      if (error.message) {
+        alert(error.message);
+      } else {
+        alert("Ocorreu um erro desconhecido.");
+      }
+    }
+
+    function checkForm() {
+      checkInputNome();
+      checkInputCpfCnpj();
+      checkInputTelefone();
+      checkInputCep();
+      checkInputRua();
+      checkInputBairro();
+      checkInputCidade();
+      checkInputEstado();
+      checkInputEmail();
+      checkInputSenha();
+
+      const formItems = form.querySelectorAll(".input-box")
+
+      const isValid = [...formItems].every((item) => {
+        return item.className === "input-box"
+      });
+
+      if (isValid) {
+        fetch('http://localhost:8080/api/usuarios', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            "nome": nome.value,
+            "cpf_cnpj": cpf_cnpj.value,
+            "email": email.value,
+            "senha": senha.value,
+            "telefone": telefone.value,
+            "cep": cep.value,
+            "rua": rua.value,
+            "bairro": bairro.value,
+            "cidade": cidade.value,
+            "estado": estado.value
+          })
+        })
+          .then(response => {
+            if (response.ok) {
+              window.location.href = 'thankyou.html';
+            } else if (response.status === 400) {
+              alert("Erro no cadastro. Verifique se os dados estão corretos.");
+            } else if (response.status === 409) {
+              alert("E-mail, CPF ou CNPJ já cadastrados. Por favor, tente outro e-mail ou documento.");
+            } else {
+              throw new Error("Ocorreu um erro desconhecido.");
+            }
+          });
+      }
+    }
+
+    function errorInput(input, message) {
+      const formItem = input.parentElement;
+      const textMessage = formItem.querySelector("a")
+
+      textMessage.innerText = message;
+
+      formItem.className = "input-box error"
+
+    }
+</script>
+
+</body>
+
+</html>

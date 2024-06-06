@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buscar usuário por ID</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            height: 100vh;
+            background: #c4ecae;
+        }
+
+        body::before {
+            content: '';
+            background: url("pexels-felixmittermeier-957024.jpg");
+            background-size: cover;
+            position: absolute;
+            width: 100%;
+            height: 120%;
+            opacity: 25%;
+        }
+
+        .container {
+            position: relative;
+            background-color: #fafafa;
+            border-radius: 8px;
+            margin: 14px;
+            max-width: 500px;
+            width: 100%;
+            box-sizing: 0 3px 5px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #2f8408;
+            padding: 24px;
+            text-align: center;
+            color: #FFF;
+            line-height: 1em
+        }
+
+        .form {
+            padding: 30px;
+        }
+
+        .form-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .form-content input {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .form-content button {
+            background-color: #2f8408;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+
+        .form-content button:hover {
+            background-color: #44b112;
+        }
+
+        .container .result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f5f5f5;
+        }
+
+        .container .result p {
+            text-align: left;
+            margin: 1rem;
+        }
+
+        .back-button {
+            background-color: #2f8408;
+            color: #FFF;
+            width: 30%;
+            font-size: 1rem;
+            border: none;
+            padding: 10px;
+            margin-top: 30px;
+            cursor: pointer;
+            border-bottom: 4px;
+            border-radius: 8px;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            margin-left: 19rem;
+        }
+
+        .back-button:hover {
+            background-color: #44b112;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <section class="header">
+        <h3>Buscar usuário pelo ID</h3>
+    </section>
+
+    <form id="form" class="form">
+        <div class="form-content">
+            <input type="number" id="id" placeholder="ID do usuário" required />
+            <button type="submit">Buscar</button>
+        </div>
+
+        <div class="result"></div>
+
+        <button class="back-button" id="back-button">Voltar</button>
+
+    </form>
+
+</div>
+<script>
+    const backButton = document.getElementById('back-button');
+    backButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.location.href = 'menu.html';
+    });
+
+    const form = document.getElementById("form");
+    const idInput = document.getElementById("id");
+    const result = document.querySelector(".result");
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const id = idInput.value;
+        fetch(`/api/usuarios/${id}`)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.error) {
+                    result.textContent = data.message;
+                } else {
+                    result.innerHTML = `
+          <p><strong>ID:</strong> ${data.id}</p>
+          <p><strong>Nome:</strong> ${data.nome}</p>
+          <p><strong>CPF/CNPJ:</strong> ${data.cpf_cnpj}</p>
+          <p><strong>E-mail:</strong> ${data.email}</p>
+          <p><strong>Telefone:</strong> ${data.telefone}</p>
+          <p><strong>CEP:</strong> ${data.cep}</p>
+          <p><strong>Rua:</strong> ${data.rua}</p>
+          <p><strong>Bairro:</strong> ${data.bairro}</p>
+          <p><strong>Cidade:</strong> ${data.cidade}</p>
+          <p><strong>Estado:</strong> ${data.estado}</p>
+        `;
+                }
+            });
+    });
+</script>
+</body>
+
+</html>
